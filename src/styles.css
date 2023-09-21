@@ -1,0 +1,21 @@
+body {
+  background-color: #000000 !important;
+  color: white !important;
+}
+
+.card {
+  background-color: #000000 !important;
+  border: none !important; /* Remove Bootstrap's border */
+}
+
+.user-details-form {
+  margin: 0; /* Reset margin */
+  padding: 0; /* Reset padding */
+}
+
+/* Optional: Adjust other form styles as needed */
+.user-details-form form {
+  /* Add any additional form styling here */
+}
+
+
