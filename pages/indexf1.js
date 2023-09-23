@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Card } from 'react-bootstrap';
 import UserDetailsInput from '../components/UserDetailsInput';
 import { WagmiConfig } from 'wagmi';
-import config from '../wagmi/wagmiConfignew';
+import config from '../wagmi/wagmiConfig';
 import WalletControls from '../components/WalletControls';
 import UserDetails from '../components/UserDetails';
 import WalletDetails from '../components/WalletDetails';
