@@ -1,22 +1,16 @@
+// pages/index.js
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import UserDetailsInput from './components/UserDetailsInput';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
-import './styles.css'; // Import your custom CSS file
+import { Container, Card } from 'react-bootstrap';
+import UserDetailsInput from '../components/UserDetailsInput';
 
-// ... rest of your code
-
-
-function App() {
+function Home() {
   const [userDetails, setUserDetails] = useState({
     username: '',
     // Initialize additional details as needed
   });
 
   return (
-    <Container className="bg-black text-light"> {/* Add bg-dark and text-light classes */}
+    <Container className="bg-black text-light">
       <Card bg="black" text="light">
         <Card.Header>
           <h1>User Details App</h1>
@@ -34,10 +28,5 @@ function App() {
   );
 }
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+export default Home;
 
