@@ -41,7 +41,7 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "userAddress",
+				"name": "_userAddress",
 				"type": "address"
 			}
 		],
@@ -79,8 +79,13 @@
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "name",
+				"name": "_userName",
 				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_userAddress",
+				"type": "address"
 			}
 		],
 		"name": "registerName",
