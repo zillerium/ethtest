@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import { useContractRead } from 'wagmi';
+import {WalletContext} from '../pages/WalletContext'
 
 function ContractRead({ contractAddress, contractABI, functionName, userAddress }) {
-  
+
+            const  {
+               userAddressName, setUserAddressName
+                } = useContext(WalletContext);
+
+
 const config = {
                 address: contractAddress,
                 abi: contractABI,
@@ -27,6 +33,7 @@ useEffect(()=>{
                         console.log("-------------------- data 2------ ", data[2].toString());
                         console.log("-------------------- data full ------ ", data);
                         console.log("-------------------- data ------ ", data[0].toString());
+			setUserAddressName(data);
                 }
            }
 

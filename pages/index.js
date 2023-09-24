@@ -16,6 +16,7 @@ const contractAddress = '0xd8576Aab222e10c7404042C95CBa1cC449622E56';
 function Home() {
   const [readContract, setReadContract] = useState(false);
   const [userAddress, setUserAddress] = useState('');
+  const [userAddressName, setUserAddressName] = useState('');
   const [userDetails, setUserDetails] = useState({
     username: '',
     // Add more user details fields here
@@ -34,7 +35,10 @@ function Home() {
   };
   return (
     <WagmiConfig config={config}>
-	  <WalletContext.Provider value={{userAddress, setUserAddress}} >
+	  <WalletContext.Provider value={{
+		  userAddress, setUserAddress,
+              userAddressName, setUserAddressName
+	  }} >
       <Container className="bg-black text-light">
         <Card bg="black" text="light">
           <Card.Header>
@@ -51,6 +55,7 @@ function Home() {
               <SimpleComponent />
 	  {/* Use the ContractInteraction component */}
 	  {userAddress}
+	  {userAddressName}
 {readContract && contractAddress ? ( // Conditionally render ContractRead component
                 <ContractRead
                   contractAddress={contractAddress}
