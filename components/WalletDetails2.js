@@ -1,10 +1,11 @@
+// WalletDetails.js
 import React, { useContext, useEffect } from 'react';
 import { WalletContext } from '../pages/WalletContext';
 import { useBalance, useAccount } from 'wagmi';
 
 function WalletDetails() {
   const { userAddress, setUserAddress } = useContext(WalletContext);
-  const { address, isConnected } = useAccount(); // Get the isConnected status
+  const { address } = useAccount();
   const { data, isError, isLoading } = useBalance({
     address,
   });
@@ -13,13 +14,11 @@ function WalletDetails() {
     setUserAddress(address);
   }, [address, setUserAddress]);
 
-  // Conditionally render the component based on the wallet connection status
-  if (!isConnected) {
-    return null; // Return null to hide the component when not connected
-  }
+  if (isLoading) return <div>Loading wallet details...</div>;
+  if (isError) return <div>Error fetching wallet details</div>;
 
   return (
-    <div style={{ background: '#3333FF', padding: '10px', borderRadius: '5px' }}>
+    <div>
       <p>
         {userAddress && (
           <span>

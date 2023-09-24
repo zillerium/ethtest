@@ -1,3 +1,4 @@
+// components/NewUserNameInput.js
 import React, { useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { WalletContext } from '../pages/WalletContext';
@@ -11,7 +12,7 @@ function NewUserNameInput() {
   };
 
   return (
-    <div className="bg-black text-white p-2 rounded"> {/* Reduce padding */}
+    <div className="bg-black text-white p-4 rounded">
       <Form>
         <Form.Group controlId="formNewUsername">
           <Form.Label>New Username</Form.Label>
@@ -19,8 +20,7 @@ function NewUserNameInput() {
             type="text"
             value={newUserName}
             onChange={handleInputChange}
-            placeholder="Enter Your Name"
-            style={{ maxWidth: '400px' }} // Set a max width for the input
+            placeholder="Enter your new username"
           />
         </Form.Group>
       </Form>

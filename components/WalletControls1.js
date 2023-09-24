@@ -1,17 +1,21 @@
 // WalletControls.js
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import { Button } from 'react-bootstrap';
-import { WalletContext } from '../pages/WalletContext';
-import { useConnect, useDisconnect, useAccount } from 'wagmi';
+import {WalletContext} from '../pages/WalletContext'
+import { useConnect, useDisconnect, useAccount } from 'wagmi'; // Import the necessary hooks
 import { InjectedConnector } from 'wagmi/connectors/injected';
 
 function WalletControls() {
-  const { userAddress } = useContext(WalletContext);
+	 const  {
+               userAddress, setUserAddress 
+                } = useContext(WalletContext);
   const { address, isConnected } = useAccount();
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
-  const { disconnect } = useDisconnect();
+
+  const { disconnect } = useDisconnect()
+
 
   return (
     <div>

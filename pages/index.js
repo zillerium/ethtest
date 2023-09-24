@@ -1,6 +1,5 @@
-// Home.js
 import React, { useState } from 'react';
-import { Container, Card } from 'react-bootstrap';
+import { Container, Card, Row, Col } from 'react-bootstrap';
 import NewUserNameInput from '../components/NewUserNameInput';
 import { WagmiConfig } from 'wagmi';
 import { WalletContext } from './WalletContext';
@@ -10,12 +9,13 @@ import WalletControls from '../components/WalletControls';
 import UserDetails from '../components/UserDetails';
 import WalletDetails from '../components/WalletDetails';
 import ContractRead from '../components/ContractRead';
-import SimpleComponent from '../components/SimpleComponent';
 import contractABI from './contractABI.json';
+import { Button } from 'react-bootstrap';
 
-const contractAddress = '0x0eDdFD965fbf3111078174612AD30065a2fA14D2';
+const contractAddress = '0xB9A1589E9E84bc236Eddf8fDa1352795c399dcf9';
 
 function Home() {
+  const [execWrite, setExecWrite] = useState(false);
   const [readContract, setReadContract] = useState(false);
   const [userAddress, setUserAddress] = useState('');
   const [userAddressName, setUserAddressName] = useState('');
@@ -24,6 +24,8 @@ function Home() {
     // Add more user details fields here
   });
   const [newUserName, setNewUserName] = useState('');
+  const [shouldRegister, setShouldRegister] = useState(false);
+
 
   const updateUserDetails = (newUserDetails) => {
     setUserDetails(newUserDetails);
@@ -37,6 +39,9 @@ function Home() {
     setReadContract(false);
   };
 
+  const changeExecWrite = () => {
+    setExecWrite(true);
+  };
   return (
     <WagmiConfig config={config}>
       <WalletContext.Provider
@@ -47,42 +52,58 @@ function Home() {
           setUserAddressName,
           newUserName,
           setNewUserName,
+	  execWrite,
+  	  setExecWrite
         }}
       >
         <Container className="bg-black text-light">
           <Card bg="black" text="light">
             <Card.Header>
-              <h1>User Details App</h1>
-              <WalletControls />
+              <Row>
+                <Col sm={8}> {/* Adjust the column size as needed */}
+                  <h1>Name Registry for Wallets</h1>
+                </Col>
+                <Col sm={4} className="text-left">
+                  <WalletControls />
+                </Col>
+              </Row>
+              <WalletDetails />
             </Card.Header>
             <Card.Body>
-              <NewUserNameInput />
-              <div>
-                <h2>User Details</h2>
-                <UserDetails userDetails={userDetails} />
-                <h2>Wallet Details</h2>
-                <WalletDetails />
-                <SimpleComponent />
-                {userAddress}
-                {userAddressName}
-                <div>new user name {newUserName}</div>
-                {readContract && contractAddress ? (
-                  <ContractRead
+              <Row>
+                <Col>
+	  { execWrite && (       <NewUserNameInput />)}
+                  <div>
+                    <div>Name Registry {userAddress}, {newUserName}</div>
+                    {userAddressName}
+	          </div>
+	       </Col>
+	      </Row>
+	      <Row>
+	        <Col>
+	           <div>
+                    {readContract && userAddress &&  (
+                      <ContractRead
+                        contractAddress={contractAddress}
+                        contractABI={contractABI}
+                        functionName="getName"
+                        userAddress={userAddress}
+                      />)}
+	           </div>
+	  readcontract - {readContract}
+	  {userAddress}
+	  <div>
+                      <Button variant="primary" onClick={handleReadContractClick}>Read Contract</Button>
+                    <Button variant="primary" onClick={handleReadContractClickFalse}>Reset Contract</Button>
+                  </div>
+	  { execWrite && (<ContractWrite
                     contractAddress={contractAddress}
                     contractABI={contractABI}
-                    functionName="getName"
-                    userAddress={userAddress}
-                  />
-                ) : (
-                  <button onClick={handleReadContractClick}>Read Contract</button>
-                )}
-                <button onClick={handleReadContractClickFalse}>Reset Contract</button>
-              </div>
-              <ContractWrite
-                contractAddress={contractAddress}
-                contractABI={contractABI}
-                functionName="registerName"
-              />
+                    functionName="registerName"
+                  />)}
+                      <Button variant="primary" onClick={changeExecWrite}>Register Name</Button>
+                </Col>
+              </Row>
             </Card.Body>
           </Card>
         </Container>

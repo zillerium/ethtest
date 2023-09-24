@@ -15,7 +15,7 @@ const config = {
                 abi: contractABI,
                // overrides: {userAddress: userAddress},
                 functionName: 'getName',
-	    args: [],
+	    args: [userAddress],
                 //functionName: 'getContractUsdcBalance',
         }
         console.log("checl allowance 2 == ", config, contractAddress, userAddress)
