@@ -9,13 +9,13 @@ function ContractRead({
   functionName,
   userAddress,
 }) {
-  const { userAddressName, setUserAddressName } = useContext(WalletContext);
+  const { userAddressName, setUserAddressName, ipfsImageHash, setIpfsImageHash } = useContext(WalletContext);
 
   const config = {
     address: contractAddress,
     abi: contractABI,
     // overrides: {userAddress: userAddress},
-    functionName: "getName",
+    functionName: "getNameAndIpfsHash",
     args: [userAddress],
     //functionName: 'getContractUsdcBalance',
   };
@@ -28,7 +28,9 @@ function ContractRead({
     if (isSuccess) {
       if (data) {
         console.log("-------------------- data full ------ ", data);
-        setUserAddressName(data);
+        setUserAddressName(data[0]);
+        setIpfsImageHash(data[1]);
+	      
       }
     }
   }, [data]);

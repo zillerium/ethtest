@@ -1,5 +1,12 @@
 [
 	{
+		"inputs": [],
+		"name": "deregisterName",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -25,6 +32,12 @@
 				"indexed": false,
 				"internalType": "string",
 				"name": "name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "ipfsImageHash",
 				"type": "string"
 			}
 		],
@@ -59,6 +72,37 @@
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "_userName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_ipfsImageHash",
+				"type": "string"
+			}
+		],
+		"name": "registerName",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_newAddress",
+				"type": "address"
+			}
+		],
+		"name": "transferName",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
@@ -75,16 +119,33 @@
 				"internalType": "bool",
 				"name": "registered",
 				"type": "bool"
+			},
+			{
+				"internalType": "string",
+				"name": "ipfsImageHash",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "deregisterName",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_userAddress",
+				"type": "address"
+			}
+		],
+		"name": "getIpfsImageHash",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -109,27 +170,25 @@
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "_userName",
-				"type": "string"
-			}
-		],
-		"name": "registerName",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
-				"name": "_newAddress",
+				"name": "_userAddress",
 				"type": "address"
 			}
 		],
-		"name": "transferName",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"name": "getNameAndIpfsHash",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]

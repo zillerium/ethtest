@@ -4,9 +4,9 @@ import { WalletContext } from '../lib/WalletContext';
 import { Button } from 'react-bootstrap';
 
 function ContractWrite({ contractAddress, contractABI }) {
-  const { newUserName, userAddress, execWrite, setExecWrite } = useContext(WalletContext);
+  const { newUserName, userAddress, execWrite, setExecWrite, ipfsImageHash } = useContext(WalletContext);
 
-  const argArr = [newUserName];
+  const argArr = [newUserName, ipfsImageHash];
   const { config, error } = usePrepareContractWrite({
     address: contractAddress,
     abi: contractABI,

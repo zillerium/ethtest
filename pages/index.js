@@ -11,13 +11,14 @@ import WalletControls from '../components/WalletControls';
 import UserDetails from '../components/UserDetails';
 import WalletDetails from '../components/WalletDetails';
 import ContractRead from '../components/ContractRead';
+import LoadImageIpfs from '../components/LoadImageIpfs';
 import contractABI from '../lib/contractABI.json';
 import { Button } from 'react-bootstrap';
 import DeregisterComponent from './DeregisterComponent';
 import ReadContractComponent from './ReadContractComponent';
 import TransferNamePage from './TransferNamePage'; // add this line to import the TransferNamePage component
 
-const contractAddress = '0xd8122d1b1417dA1aFD5dee1A6584Aec71F841701';
+const contractAddress = '0xE764443b60F45A4a4De7499645E59278f17536Bb';
 
 function Home() {
   const [execWrite, setExecWrite] = useState(false);
@@ -25,6 +26,7 @@ function Home() {
   const [execDeregister, setExecDeregister] = useState(false);
   const [readContract, setReadContract] = useState(false);
   const [userAddress, setUserAddress] = useState('');
+  const [ipfsImageHash, setIpfsImageHash] = useState('');
   const [receiverAddress, setReceiverAddress] = useState('');
   const [userAddressName, setUserAddressName] = useState('');
   const [userDetails, setUserDetails] = useState({
@@ -66,7 +68,9 @@ function Home() {
 			execTransfer,
 			setExecTransfer,
 			receiverAddress,
-			setReceiverAddress
+			setReceiverAddress,
+			ipfsImageHash,
+			setIpfsImageHash
         }}
       >
         <Container className="bg-black text-light">
@@ -93,12 +97,14 @@ function Home() {
                 setReadContract={setReadContract}
                 userAddress={userAddress}
                 userAddressName={userAddressName}
+	        ipfsImageHash={ipfsImageHash}
               />
             </Col>
               </Row>
 	  <hr />
 	  <Row>
 	  <Col>
+	  {ipfsImageHash}
   {userAddress ? (
     <RegisterComponent
       contractAddress={contractAddress}
@@ -133,7 +139,7 @@ function Home() {
                 <Col>
                   {/* Use the TransferNamePage component here */}
 	  {userAddress ? (    <TransferNamePage
-                    contractAddress={contractAddress}
+		  contractAddress={contractAddress}
                     contractABI={contractABI}
 		    execTransfer={execTransfer}
 		  setExecTransfer={setExecTransfer}
@@ -144,6 +150,15 @@ function Home() {
 		  )}
                 </Col>
               </Row>
+	  <Row>
+             <Col>
+
+   <div style={{ borderRadius: "10px", border: "1px solid lightgrey", padding: "10px" }}>
+      <LoadImageIpfs />
+    </div>
+	     </Col>
+
+	  </Row>
             </Card.Body>
           </Card>
         </Container>

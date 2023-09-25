@@ -6,7 +6,8 @@ function ReadContractComponent({
   contractAddress,
   contractABI,
   userAddress,
-  userAddressName
+  userAddressName,
+  ipfsImageHash
 }) {
   // Local state to manage the input value
   const [inputUserAddress, setInputUserAddress] = useState('');
@@ -51,7 +52,16 @@ function ReadContractComponent({
           userAddress={inputUserAddress}
         />
       )}
-      <h4>Registered Name: {userAddressName}</h4>
+      <h4>Registered Profile: {userAddressName}</h4>
+{ipfsImageHash && (
+        <div>
+          IPFS Image Profile hash:{' '}
+          <a href={`https://ipfs.io/ipfs/${ipfsImageHash}` } target="_blank" rel="noopener noreferrer" >
+            {ipfsImageHash}
+          </a>
+        </div>
+      )}
+
       <div>
         <Button variant="primary" onClick={handleButtonClick} disabled={buttonDisabled}>
           Read Contract
