@@ -14,6 +14,7 @@ import ContractRead from '../components/ContractRead';
 import contractABI from './contractABI.json';
 import { Button } from 'react-bootstrap';
 import DeregisterComponent from './DeregisterComponent';
+import ReadContractComponent from './ReadContractComponent';
 
 const contractAddress = '0xdf80612cd1C9C4D7Da582A4161a71c1ef42F119d';
 
@@ -75,44 +76,33 @@ function Home() {
               <WalletDetails />
             </Card.Header>
             <Card.Body>
-              <Row>
-                <Col>
-	  { execWrite && (       <NewUserNameInput />)}
-                  <div>
-                    <div>Name Registry {userAddress}, {newUserName}</div>
-                    {userAddressName}
-	          </div>
-	       </Col>
-	      </Row>
+	  <hr />
 	      <Row>
-	        <Col>
-	           <div>
-                    {readContract && userAddress &&  (
-                      <ContractRead
-                        contractAddress={contractAddress}
-                        contractABI={contractABI}
-                        functionName="getName"
-                        userAddress={userAddress}
-                      />)}
-	           </div>
-	  readcontract - {readContract}
-	  {userAddress}
-	  <div>
-                      <Button variant="primary" onClick={handleReadContractClick}>Read Contract</Button>
-                    <Button variant="primary" onClick={handleReadContractClickFalse}>Reset Contract</Button>
-                  </div>
-                </Col>
-              </Row>
-	  <Row>
-            <Col>
-              <RegisterComponent
+	  <Col>
+              <ReadContractComponent
                 contractAddress={contractAddress}
                 contractABI={contractABI}
-                execWrite={execWrite}
-                setExecWrite={setExecWrite}
+                readContract={readContract}
+                setReadContract={setReadContract}
+                userAddress={userAddress}
+                userAddressName={userAddressName}
+              />
+            </Col>
+              </Row>
+	  <hr />
+	  <Row>
+            <Col>
+	      <RegisterComponent
+                 contractAddress={contractAddress}
+                 contractABI={contractABI}
+                 execWrite={execWrite}
+                 setExecWrite={setExecWrite}
+                 newUserName={newUserName}
+                 setNewUserName={setNewUserName}
               />
 	    </Col>
 	  </Row>
+	  <hr />
 	  <Row>
              <Col>
 	          <DeregisterComponent

@@ -36,7 +36,7 @@ function ContractWrite({ contractAddress, contractABI }) {
     <>
       <div>
         <Button variant="primary" onClick={registerName}>
-          Register Contract Name
+          Confirm Registration
         </Button>
       </div>
       {error && <div>Error in formatting {error.message}</div>}

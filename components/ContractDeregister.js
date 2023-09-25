@@ -36,7 +36,7 @@ function ContractDeregister({ contractAddress, contractABI }) {
     <>
       <div>
         <Button variant="primary" onClick={deregisterName}>
-         Deregister Contract Name
+         Confirm Deregistration 
         </Button>
       </div>
       {error && <div>Error in formatting {error.message}</div>}
