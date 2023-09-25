@@ -3,6 +3,10 @@ import React from 'react';
 import ContractDeregister from '../components/ContractDeregister';
 import { Button } from 'react-bootstrap';
 
+function Spacer({ height }) {
+  return <div style={{ height: height }} />;
+}
+
 function DeregisterComponent({ contractAddress, contractABI, execDeregister, setExecDeregister }) {
   return (
     <div>
@@ -14,7 +18,8 @@ function DeregisterComponent({ contractAddress, contractABI, execDeregister, set
           functionName="deregisterName"
         />
       )}
-      <Button variant="primary" onClick={() => setExecDeregister(true)}>
+      <Spacer height="20px" />
+      <Button variant="primary" className="mb-3" onClick={() => setExecDeregister(true)}>
         Deregister Name
       </Button>
     </div>
