@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { WalletContext } from '../pages/WalletContext';
+import { WalletContext } from '../lib/WalletContext';
 import { useBalance, useAccount } from 'wagmi';
 
 function WalletDetails() {

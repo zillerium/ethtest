@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { WalletContext } from '../pages/WalletContext';
+import { WalletContext } from '../lib/WalletContext';
 
 function NewUserNameInput() {
   const { newUserName, setNewUserName } = useContext(WalletContext);

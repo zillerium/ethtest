@@ -1,7 +1,7 @@
 // WalletControls.js
 import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
-import { WalletContext } from '../pages/WalletContext';
+import { WalletContext } from '../lib/WalletContext';
 import { useConnect, useDisconnect, useAccount } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 

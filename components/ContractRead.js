@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Button } from "react-bootstrap";
 import { useContractRead } from "wagmi";
-import { WalletContext } from "../pages/WalletContext";
+import { WalletContext } from "../lib/WalletContext";
 
 function ContractRead({
   contractAddress,

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useContractWrite, usePrepareContractWrite } from 'wagmi';
-import { WalletContext } from '../pages/WalletContext';
+import { WalletContext } from '../lib/WalletContext';
 import { Button } from 'react-bootstrap';
 
 function ContractWrite({ contractAddress, contractABI }) {
