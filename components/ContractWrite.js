@@ -17,11 +17,14 @@ function ContractWrite({ contractAddress, contractABI }) {
   const { data, isLoading, isSuccess, write } = useContractWrite(config);
 
   const [writeError, setWriteError] = React.useState(null);
+  const [txnStatus, setTxnStatus] = React.useState(null);
+
 
   const registerName = async () => {
     try {
       const res = await write?.();
       console.log('-- res', res);
+      setTxnStatus("txn started on the blockchain");
     } catch (err) {
       console.log('---- err', err);
       setWriteError(err.message);
@@ -41,9 +44,9 @@ function ContractWrite({ contractAddress, contractABI }) {
       </div>
       {error && <div>Error in formatting {error.message}</div>}
       {writeError && <div>Error in writing to contract: {writeError}</div>}
-    </>
+      {txnStatus && !writeError && !error && (<div>Txn Status: {txnStatus}</div>)}
+       </>
   );
 }
 
 export default ContractWrite;
-

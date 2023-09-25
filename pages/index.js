@@ -16,7 +16,7 @@ import { Button } from 'react-bootstrap';
 import DeregisterComponent from './DeregisterComponent';
 import ReadContractComponent from './ReadContractComponent';
 
-const contractAddress = '0xdf80612cd1C9C4D7Da582A4161a71c1ef42F119d';
+const contractAddress = '0xd8122d1b1417dA1aFD5dee1A6584Aec71F841701';
 
 function Home() {
   const [execWrite, setExecWrite] = useState(false);
@@ -91,26 +91,33 @@ function Home() {
               </Row>
 	  <hr />
 	  <Row>
-            <Col>
-	      <RegisterComponent
-                 contractAddress={contractAddress}
-                 contractABI={contractABI}
-                 execWrite={execWrite}
-                 setExecWrite={setExecWrite}
-                 newUserName={newUserName}
-                 setNewUserName={setNewUserName}
-              />
-	    </Col>
+	  <Col>
+  {userAddress ? (
+    <RegisterComponent
+      contractAddress={contractAddress}
+      contractABI={contractABI}
+      execWrite={execWrite}
+      setExecWrite={setExecWrite}
+      newUserName={newUserName}
+      setNewUserName={setNewUserName}
+    />
+  ) : (
+    <p>Connect to your wallet to register your name.</p>
+  )}
+</Col>
+
 	  </Row>
 	  <hr />
 	  <Row>
              <Col>
-	          <DeregisterComponent
+	  {userAddress ? (        <DeregisterComponent
             contractAddress={contractAddress}
             contractABI={contractABI}
             execDeregister={execDeregister}
             setExecDeregister={setExecDeregister}
-          />
+          />) : (
+<p>Connect your wallet to deregister your name.</p>
+	  )}
 
 	     </Col>
 	  </Row>
