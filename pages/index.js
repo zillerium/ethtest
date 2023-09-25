@@ -15,14 +15,17 @@ import contractABI from '../lib/contractABI.json';
 import { Button } from 'react-bootstrap';
 import DeregisterComponent from './DeregisterComponent';
 import ReadContractComponent from './ReadContractComponent';
+import TransferNamePage from './TransferNamePage'; // add this line to import the TransferNamePage component
 
 const contractAddress = '0xd8122d1b1417dA1aFD5dee1A6584Aec71F841701';
 
 function Home() {
   const [execWrite, setExecWrite] = useState(false);
+  const [execTransfer, setExecTransfer] = useState(false);
   const [execDeregister, setExecDeregister] = useState(false);
   const [readContract, setReadContract] = useState(false);
   const [userAddress, setUserAddress] = useState('');
+  const [receiverAddress, setReceiverAddress] = useState('');
   const [userAddressName, setUserAddressName] = useState('');
   const [userDetails, setUserDetails] = useState({
     username: '',
@@ -59,7 +62,11 @@ function Home() {
 	  execWrite,
   	  setExecWrite,
 	  execDeregister,
-	  setExecDeregister
+	  setExecDeregister,
+			execTransfer,
+			setExecTransfer,
+			receiverAddress,
+			setReceiverAddress
         }}
       >
         <Container className="bg-black text-light">
@@ -121,6 +128,22 @@ function Home() {
 
 	     </Col>
 	  </Row>
+	  <hr />
+	  <Row>
+                <Col>
+                  {/* Use the TransferNamePage component here */}
+	  {userAddress ? (    <TransferNamePage
+                    contractAddress={contractAddress}
+                    contractABI={contractABI}
+		    execTransfer={execTransfer}
+		  setExecTransfer={setExecTransfer}
+		  receiverAddress={receiverAddress}
+		  setReceiverAddress={setReceiverAddress}
+                  />) : (
+<p>Connect your wallet to transfer your name.</p>
+		  )}
+                </Col>
+              </Row>
             </Card.Body>
           </Card>
         </Container>
