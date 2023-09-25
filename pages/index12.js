@@ -4,7 +4,6 @@ import NewUserNameInput from '../components/NewUserNameInput';
 import { WagmiConfig } from 'wagmi';
 import { WalletContext } from './WalletContext';
 import ContractWrite from '../components/ContractWrite';
-import RegisterComponent from './RegisterComponent';
 import ContractDeregister from '../components/ContractDeregister';
 import config from '../wagmi/wagmiConfignew';
 import WalletControls from '../components/WalletControls';
@@ -13,9 +12,8 @@ import WalletDetails from '../components/WalletDetails';
 import ContractRead from '../components/ContractRead';
 import contractABI from './contractABI.json';
 import { Button } from 'react-bootstrap';
-import DeregisterComponent from './DeregisterComponent';
 
-const contractAddress = '0xdf80612cd1C9C4D7Da582A4161a71c1ef42F119d';
+const contractAddress = '0xB9A1589E9E84bc236Eddf8fDa1352795c399dcf9';
 
 function Home() {
   const [execWrite, setExecWrite] = useState(false);
@@ -29,6 +27,7 @@ function Home() {
   });
   const [newUserName, setNewUserName] = useState('');
   const [shouldRegister, setShouldRegister] = useState(false);
+
 
   const updateUserDetails = (newUserDetails) => {
     setUserDetails(newUserDetails);
@@ -101,27 +100,22 @@ function Home() {
                       <Button variant="primary" onClick={handleReadContractClick}>Read Contract</Button>
                     <Button variant="primary" onClick={handleReadContractClickFalse}>Reset Contract</Button>
                   </div>
+	  { execWrite && (<ContractWrite
+                    contractAddress={contractAddress}
+                    contractABI={contractABI}
+                    functionName="registerName"
+                  />)}
+                      <Button variant="primary" onClick={changeExecWrite}>Register Name</Button>
                 </Col>
               </Row>
 	  <Row>
-            <Col>
-              <RegisterComponent
-                contractAddress={contractAddress}
-                contractABI={contractABI}
-                execWrite={execWrite}
-                setExecWrite={setExecWrite}
-              />
-	    </Col>
-	  </Row>
-	  <Row>
              <Col>
-	          <DeregisterComponent
-            contractAddress={contractAddress}
-            contractABI={contractABI}
-            execDeregister={execDeregister}
-            setExecDeregister={setExecDeregister}
-          />
-
+      { execDeregister && (<ContractDeregister
+                    contractAddress={contractAddress}
+                    contractABI={contractABI}
+                    functionName="deregisterName"
+                  />)}
+	            <Button variant="primary" onClick={()=>setExecDeregister(true)}>Deregister Name</Button>
 	     </Col>
 	  </Row>
             </Card.Body>
