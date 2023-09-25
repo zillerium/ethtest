@@ -2,42 +2,48 @@
 pragma solidity ^0.8.0;
 
 contract NameRegistry {
-    // Mapping to store the association between Ethereum addresses and names
-    mapping(address => string) public addressToName;
-    
-    // Mapping to check if an address has already registered a name
-    mapping(address => bool) public isRegistered;
-    
+    // Define a struct to represent user profile
+    struct UserProfile {
+        string userName;
+        bool registered;
+    }
+
+    // Mapping to store the association between Ethereum addresses and user profiles
+    mapping(address => UserProfile) public addressToProfile;
+
     // Event to log the registration of a new name
     event NameRegistered(address indexed ethAddress, string name);
 
-    // Function to register a name with an Ethereum address
-    function registerName(string memory name) public returns (uint) {
-        // Check if the name is not empty
-        if (bytes(name).length == 0) {
-            // Return code 404 for name not specified
-            return 404;
-        }
-        
-        // Check if the address is already registered
-        if (isRegistered[msg.sender]) {
-            // Return code 811 for duplicate attempt
-            return 811;
-        }
-        
-        addressToName[msg.sender] = name;
-        isRegistered[msg.sender] = true;
-        
-        emit NameRegistered(msg.sender, name);
-        
-        // Return code 200 for success
-        return 200;
+    // Event to log the deregistration of a name
+    event NameDeregistered(address indexed ethAddress);
+
+    // Function to register a name
+    function registerName(string memory _userName) public {
+        require(bytes(_userName).length > 0, "Name should not be empty");
+        require(!addressToProfile[msg.sender].registered, "Address is already registered");
+
+        addressToProfile[msg.sender] = UserProfile({userName: _userName, registered: true});
+
+        emit NameRegistered(msg.sender, _userName);
     }
-    
-    // Function to fetch the name associated with an Ethereum address
-    function getName(address userAddress) public view returns (string memory) {
-        if (isRegistered[userAddress]) {
-            return addressToName[userAddress];
+
+    // Function to deregister a name
+    function deregisterName() public {
+        // Check if the address is registered
+        require(addressToProfile[msg.sender].registered, "Address is not registered");
+
+        // Mark the address as deregistered and clear the name
+        addressToProfile[msg.sender] = UserProfile({userName: "", registered: false});
+
+        emit NameDeregistered(msg.sender);
+        
+    }
+
+    // Function to fetch the name associated with the sender's address
+    function getName(address _userAddress) public view returns (string memory) {
+        UserProfile memory profile = addressToProfile[_userAddress];
+        if (profile.registered) {
+            return profile.userName;
         } else {
             return "not found";
         }
