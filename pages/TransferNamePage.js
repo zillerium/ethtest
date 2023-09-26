@@ -1,10 +1,16 @@
 // TransferNamePage.js
-import React, { useState } from 'react';
-import TransferName from '../components/TransferName';
-import { Button, Form } from 'react-bootstrap';
+import React, { useState } from "react";
+import TransferName from "../components/TransferName";
+import { Button, Form } from "react-bootstrap";
 
-function TransferNamePage({ contractAddress, contractABI, execTransfer, setExecTransfer, receiverAddress, setReceiverAddress }) {
-
+function TransferNamePage({
+  contractAddress,
+  contractABI,
+  execTransfer,
+  setExecTransfer,
+  receiverAddress,
+  setReceiverAddress,
+}) {
   return (
     <div>
       <h2>Transfer Name</h2>
@@ -17,7 +23,7 @@ function TransferNamePage({ contractAddress, contractABI, execTransfer, setExecT
           placeholder="receiver address"
         />
       </Form.Group>
-	      {execTransfer && (
+      {execTransfer && (
         <TransferName
           contractAddress={contractAddress}
           contractABI={contractABI}

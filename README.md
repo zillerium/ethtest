@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Name Registry
+This project is designed to store a person's name against an Ethereum wallet address. This is augmented by a profile image stored on IPFS and the IPFS address is stored with the name and Ethereum address.
 
-## Getting Started
+Key functionality:
+1. Register a name with optionally an IPFS image address for the profile image (must be for a connected wallet address)
+2. Deregister a name (also for the connected wallet address)
+3. Transfer the name to a new wallet address (receiver address must have no name against it), this also transfers the IPFS address
+4. Add an image to IPFS (returns IPFS address)
+5. Read the profile details of any address (name and IPFS address)
 
-First, run the development server:
+Wagmi (wagmi.sh) is used for the wallet connection, and the smart contract interactions.Wagmi is part of WalletConnect. Docs: https://wagmi.sh/react/getting-started 
+This project also uses Next.js (https://nextjs.org/docs/getting-started/installation).
 
-```bash
+Infura is used for the IPFS storage (https://www.infura.io/). 
+
+## Design Choices
+
+1. WalletConnect was selected to provide the functionalities to wallets due to wagmi.
+2. Nextjs was selected because it fits well with wagmi.
+3. Infura was selected because it is well established for IPFS hosting.
+
+## Challenges
+
+1. The main challenge using Nextjs is ensuring the rendering is correct for components. Components can easily be rendered at the wrong time when a state changes and this can cause an infinite loop (which is stopped by Nextjs). The main approach taken to solve this was adding a state which indicated that an update was done.
+2. The blockchain updates have a latency which means that when a UI action is completed, it can take some time for the update. This can mean the UI does not show the upadte immediately. Some event management from the solidity contract would help with this. 
+
+# Table of Contents
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Contributing](#contributing)
+4. [License](#license)
+
+## Installation
+This project needs environment variables as follows stored in .env.local in the root directory:
+NEXT_PUBLIC_REACT_APP_PROJECT_ID=...
+NEXT_PUBLIC_REACT_APP_INFURA_PROJECT_ID=...
+NEXT_PUBLIC_REACT_APP_INFURA_API_KEY=...
+NEXT_PUBLIC_REACT_APP_VAR=1
+
+PROJECT_ID: via https://cloud.walletconnect.com/app
+
+INFURA_PROJECT_ID: via https://www.infura.io/
+
+INFURA_API_KEY: via https://www.infura.io/ 
+
+git clone https://github.com/zillerium/ethtest
+cd ethtest
+add environmental vars
+npm install
+
+##Usage
+
 npm run dev
-# or
-yarn dev
-```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+##Contributing
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Fork and contribute or create a new branch
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+##Licence
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+MIT License
 
-## Learn More
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-To learn more about Next.js, take a look at the following resources:
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

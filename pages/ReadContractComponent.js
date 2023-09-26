@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import ContractRead from '../components/ContractRead';
-import { Button, Form } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import ContractRead from "../components/ContractRead";
+import { Button, Form } from "react-bootstrap";
 
 function ReadContractComponent({
   contractAddress,
   contractABI,
   userAddress,
   userAddressName,
-  ipfsImageHash
+  ipfsImageHash,
 }) {
   // Local state to manage the input value
-  const [inputUserAddress, setInputUserAddress] = useState('');
+  const [inputUserAddress, setInputUserAddress] = useState("");
   const [shouldRead, setShouldRead] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
@@ -36,7 +36,9 @@ function ReadContractComponent({
     <div>
       <h2>Read your name</h2>
       <Form.Group controlId="userAddress">
-        <Form.Label>Wallet Address (change the address to read again):</Form.Label>
+        <Form.Label>
+          Wallet Address (change the address to read again):
+        </Form.Label>
         <Form.Control
           type="text"
           value={inputUserAddress}
@@ -53,17 +55,25 @@ function ReadContractComponent({
         />
       )}
       <h4>Registered Profile: {userAddressName}</h4>
-{ipfsImageHash && (
+      {ipfsImageHash && (
         <div>
-          IPFS Image Profile hash:{' '}
-          <a href={`https://ipfs.io/ipfs/${ipfsImageHash}` } target="_blank" rel="noopener noreferrer" >
+          IPFS Image Profile hash:{" "}
+          <a
+            href={`https://ipfs.io/ipfs/${ipfsImageHash}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {ipfsImageHash}
           </a>
         </div>
       )}
 
       <div>
-        <Button variant="primary" onClick={handleButtonClick} disabled={buttonDisabled}>
+        <Button
+          variant="primary"
+          onClick={handleButtonClick}
+          disabled={buttonDisabled}
+        >
           Read Contract
         </Button>
       </div>
