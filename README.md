@@ -48,17 +48,17 @@ cd ethtest
 add environmental vars
 npm install
 
-##Usage
+## Usage
 
 npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-##Contributing
+## Contributing
 
 Fork and contribute or create a new branch
 
-##Licence
+## Licence
 
 MIT License
 
